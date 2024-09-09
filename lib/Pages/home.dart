@@ -11,7 +11,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: const Text("Kaarya pragati me hai"),
+      body: Center(child: const Text("Kaarya pragati me hai")),
     );
   }
 }

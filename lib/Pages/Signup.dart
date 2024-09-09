@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:night/Pages/Homepage.dart';
+import 'package:night/Pages/BottomNav.dart';
+import 'package:night/Pages/home.dart';
 import 'package:night/Pages/Login.dart';
 import 'package:random_string/random_string.dart';
 
@@ -18,15 +19,16 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
 
 
-  String? name, email, password;
+  String? name, email, password, phone;
   TextEditingController nameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
   registration() async{
-    if (password!=null && name!=null && email!=null){
+    if (password!=null && name!=null && email!=null && phone!=null){
       try{
         UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email!, password: password!);
 
@@ -54,7 +56,7 @@ class _SignupState extends State<Signup> {
         //};
         //await DatabaseMethods().addUserDetails(userInfoMap, Id);
 
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const Homepage()) );
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const BottomNav()) );
 
       }on FirebaseException catch(e) {
         if(e.code=="weak"){
@@ -124,7 +126,7 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
 
-                      const SizedBox(height: 30,),
+                      const SizedBox(height: 20,),
 
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -138,6 +140,24 @@ class _SignupState extends State<Signup> {
                             return null;
                           },
                           controller: emailController,
+                          decoration:const InputDecoration(border: InputBorder.none, hintText: "Email"),
+                        ),
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        decoration: BoxDecoration(color: const Color.fromRGBO(255,245,228,1), borderRadius: BorderRadius.circular(14)),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your Phone No.';
+                            }
+                            return null;
+                          },
+                          controller: phoneController,
                           decoration:const InputDecoration(border: InputBorder.none, hintText: "Email"),
                         ),
                       ),

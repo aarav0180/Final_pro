@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:night/Pages/Homepage.dart';
+import 'package:night/Pages/BottomNav.dart';
+import 'package:night/Pages/home.dart';
 import 'package:night/Pages/SignUp.dart';
 
 import '../Widgets/service_widget.dart';
@@ -33,14 +34,14 @@ class _LoginState extends State<Login> {
           content: Text("Login Successfully",
               style: TextStyle(color: Colors.black, fontSize: 16))));
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Homepage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNav()));
     } on FirebaseException catch (e) {
-      if (e.code == "user-not") {
+      if (e.code == 'user-not') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.greenAccent,
             content: Text("user not registered",
                 style: TextStyle(color: Colors.black, fontSize: 16))));
-      }else if(e.code=="wrong-password") {
+      }else if(e.code=='wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.greenAccent,
             content: Text("wrong password",
@@ -184,7 +185,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
 
-                      SizedBox(height: 30,)
+                      const SizedBox(height: 60,)
 
                     ],
                   ),
